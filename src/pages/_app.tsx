@@ -11,6 +11,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import theme from "@/utils/theme";
 import createEmotionCache from "@/utils/createEmotionCache";
+import { QueryClientProvider } from "react-query";
+import queryClient from "@/utils/queryClient";
 import HeaderBar from "@/components/HeaderBar";
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -30,8 +32,10 @@ export default function MyApp(props: MyAppProps) {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <HeaderBar />
-        <Component {...pageProps} />
+        <QueryClientProvider client={queryClient}>
+          <HeaderBar />
+          <Component {...pageProps} />
+        </QueryClientProvider>
       </ThemeProvider>
     </CacheProvider>
   );
