@@ -28,11 +28,21 @@ export default function ProductCard({ product }: ProductCardProps) {
         </Stack>
       </CardContent>
       <CardActions>
-        <Stack direction="row">
+        <Stack direction="row" flex={1}>
           {!hasProduct(product) ? (
-            <Button onClick={() => addProduct(product)}>Add</Button>
+            <Button
+              fullWidth
+              variant="contained"
+              onClick={() => addProduct(product)}
+            >
+              Add
+            </Button>
           ) : (
-            <Button color="error" onClick={() => removeProduct(product)}>
+            <Button
+              fullWidth
+              color="error"
+              onClick={() => removeProduct(product)}
+            >
               Remove
             </Button>
           )}
