@@ -8,7 +8,7 @@ const fetchProducts = async () => {
         {"name": "Powered site", "type": "Accommodation - Site", "price": 60},
         {"name": "Poolside Cabin", "type": "Accommodation - Cabin", "price": 210},
         {"name": "Luxury Safari Tent", "type": "Accommodation - Cabin", "price": 340},
-        {"name": "Membership", "type": "Accommodation - Site", "price": 500}
+        {"name": "Membership", "type": "Membership", "price": 500}
     ] as Product[]
 }
 
