@@ -1,8 +1,9 @@
-import useProductsQuery from "@/hooks/useProductsQuery";
 import Head from "next/head";
 import Image from "next/image";
 
 import { Box, Stack, Typography } from "@mui/material";
+import ProductCard from "@/components/ProductCard";
+import useProductsQuery from "@/hooks/queries/useProductsQuery";
 
 export default function Home() {
   const { data: products = [], isLoading: productsLoading } =
@@ -13,21 +14,10 @@ export default function Home() {
   }
 
   return (
-    <Box justifyContent="center" flex={1}>
+    <Box justifyContent="center" flex={1} pt={4}>
       <Stack direction="row" spacing={3} justifyContent="center">
         {products.map((product) => (
-          <Box
-            key={product.name}
-            p={3}
-            sx={{
-              cursor: "pointer",
-              "&:hover": { background: "rgba(0,0,0,.3)" },
-            }}
-          >
-            <Typography>
-              {product.name} - ${product.price}
-            </Typography>
-          </Box>
+          <ProductCard key={product.name} product={product} />
         ))}
       </Stack>
     </Box>
