@@ -14,8 +14,8 @@ import Product from "@/types/Product";
 import ProductType from "@/types/ProductType";
 
 declare type SetValue<T> = Dispatch<SetStateAction<T>>;
-type CartItem = Product & { qty: number };
-type Cart = { [key: string]: CartItem };
+export type CartItem = Product & { qty: number };
+export type Cart = { [key: string]: CartItem };
 
 const ShoppingContext = createContext<[Cart, SetValue<Cart>] | null>(null);
 
@@ -38,7 +38,23 @@ export default function useShoppingCart() {
   const removeProduct = (product: Product) => {
     setMap((prev) => {
       const copy = { ...prev };
+
       delete copy[product.name];
+
+      return copy;
+    });
+  };
+
+  const decrementQty = (product: Product) => {
+    setMap((prev) => {
+      const copy = { ...prev };
+
+      if (copy[product.name].qty === 1) {
+        delete copy[product.name];
+      } else {
+        copy[product.name].qty -= 1;
+      }
+
       return copy;
     });
   };
@@ -53,6 +69,7 @@ export default function useShoppingCart() {
     cart,
     addProduct,
     removeProduct,
+    decrementQty,
     reset,
     hasProduct: (product: Product) => !!map[product.name],
     totalItems: cart.length,
