@@ -15,6 +15,7 @@ import { QueryClientProvider } from "react-query";
 import queryClient from "@/utils/queryClient";
 import HeaderBar from "@/components/HeaderBar";
 import { ShoppingCartProvider } from "@/hooks/useShoppingCart";
+import { MembershipProvider } from "@/hooks/useMembership";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -34,10 +35,12 @@ export default function MyApp(props: MyAppProps) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
         <QueryClientProvider client={queryClient}>
-          <ShoppingCartProvider>
-            <HeaderBar />
-            <Component {...pageProps} />
-          </ShoppingCartProvider>
+          <MembershipProvider>
+            <ShoppingCartProvider>
+              <HeaderBar />
+              <Component {...pageProps} />
+            </ShoppingCartProvider>
+          </MembershipProvider>
         </QueryClientProvider>
       </ThemeProvider>
     </CacheProvider>
